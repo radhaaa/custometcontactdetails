@@ -1,8 +1,7 @@
 import React, { useRef, useState } from "react";
 import ReactDOM from 'react-dom';
 import './Crud.css';
-
-function Crud() {
+function CrudData(){
     const List = [
         {
             id: 1,
@@ -32,16 +31,19 @@ function Crud() {
             mobile: "66649999",
             gender: "Male",
             contacttype: "Business"
+        },
+        {
+            id: 5,
+            name: "sreekanth",
+            mobile: "66649999",
+            gender: "Male",
+            contacttype: "Business"
         }
 
     ]
     const [lists, setList] = useState(List)
-    const [updateList, setupdateList] = useState(-1)
-
-
-    return (
-
-
+    const [updateState, setupdateState] = useState(-1)
+    return(
         <div className='ui main'>
             <div className="con-dtn-fema">
                 <div><ul>
@@ -148,129 +150,60 @@ function Crud() {
                 </div>
             </div>
 
-            <div><AddList setList={setList} /></div>
-            <form onSubmit={handleSubmit}>
-
-                {
-                    lists.map((current) => {
-                        return (
-                            updateList === current.id ? <EditList current={current} lists={lists} setList={setList} /> :
-
-
-
-                                <div className='add-box'>
-                                    <div className='con-name'>
-                                        <label>
-                                            <div><h6>Name:</h6></div><div>{current.name}</div>
-                                        </label>
-                                    </div>
-                                    <label>
-                                        <div className='con-mobile'><div><h6>Mobile:</h6></div><div>{current.mobile}</div></div>
-                                    </label>
-                                    <label>
-                                        <div className='con-gender'><div><h6>Gender:</h6></div><div>{current.gender}</div></div>
-                                    </label>
-                                    <label>
-                                        <div className='con-contype'><div><h6>ContactType:</h6></div><div>{current.contacttype}</div></div>
-                                    </label>
-                                    <label>
-                                        <div className="btn-btn">
-                                            <button onClick={() => handleEdit(current.id)}>Edit</button>
-                                            <button type="button" onClick={() => handleDelete(current.id)}>Delete</button>
-                                        </div>
-                                    </label>
-                                </div>
-                        )
-                    }
-                    )
-                }
-            </form>
-
-        </div>
-    )
-    function handleEdit(id) {
-        setupdateList(id)
-
-    }
-    function handleDelete(id) {
-        const newlist = lists.filter((li) => li.id !== id)
-        setList(newlist)
-
-    }
-
-    function handleSubmit(event) {
-        event.preventDefault();
-        const name = event.target.elements.name.value;
-        const mobile = event.target.elements.mobile.value;
-        const gender = event.target.elements.gender.value;
-        const contacttype = event.target.elements.contacttype.value
-        const newlist = lists.map((li) => (
-            li.id === updateList ? { ...li, name: name, mobile: mobile, gender: gender, contacttype: contacttype } : li
-        ))
-        setList(newlist)
-        setupdateList(-1)
-
-
-    }
-
-
-}
-function AddList({ setList }) {
-    const nameRef = useRef();
-    const mobileRef = useRef();
-    const genderRef = useRef();
-    const contactRef = useRef();
-    function handleSubmit(event) {
-        event.preventDefault();
-        const name = event.target.elements.name.value;
-        const mobile = event.target.elements.mobile.value;
-        const gender = event.target.elements.gender.value;
-        const contacttype = event.target.elements.contacttype.value
-        const newlist = {
-            id: 5,
-            name,
-            mobile,
-            gender,
-            contacttype
-        }
-        setList((preList) => {
-            return (preList.concat(newlist))
-        })
-        nameRef.current.value = ""
-        mobileRef.current.value = ""
-        genderRef.current.value = ""
-        contactRef.current.value = ""
-
-    }
-
-
-
-    return (
-
+        <AddList setList={setList} />
         <form onSubmit={handleSubmit}>
-            <label>
-                Name:
-                <input type="text" name="name" placeholder="Enter Name" ref={nameRef} />
-            </label>
-            <label>
-                Mobile:
-                <input type="text" name="mobile" placeholder="Enter Mobile" ref={mobileRef} />
-            </label>
-            <label>
-                Gender:
-                <input type="text" name="gender" placeholder="Male/Female" ref={genderRef} />
-            </label>
-            <label>
-                ContactType:
-                <input type="text" name="contacttype" placeholder="Personal/Business" ref={contactRef} />
-            </label>
+        <table>
+            {
+                lists.map((current) =>(
+                    updateState === current.id ? <EditList current={current} lists={lists} setList={setList} /> :
 
-            <button type="submit">Add</button>
+                    <tr>
+                        <td>{current.name}</td>
+                        <td>{current.mobile}</td>
+                        <td>{current.gender}</td>
+                        <td>{current.contacttype}</td>
+                        <td>
+                            <button className="edit" onClick={() => handleEdit(current.id)}>Edit</button>
+                            <button className="delete" onClick={() => handleDelete(current.id)}>Delete</button>
+                        </td>
+                    </tr>
+                )                
+                )
+            }
+        </table>
         </form>
-    )
-}
-function EditList({ current, lists, setList }) {
+        </div>
 
+  )
+
+function handleEdit(id) {
+    setupdateState(id)
+
+}
+function handleDelete(id) {
+    const newlist = lists.filter((li) => li.id !== id)
+    setList(newlist)
+
+}
+function handleSubmit(event) {
+    event.preventDefault();
+    const name = event.target.elements.name.value;
+    const mobile = event.target.elements.mobile.value;
+    const gender = event.target.elements.gender.value;
+    const contacttype = event.target.elements.contacttype.value
+    const newlist = lists.map((li) => (
+        li.id === updateState ? { ...li, name: name, mobile: mobile, gender: gender, contacttype: contacttype } : li
+    ))
+    setList(newlist)
+    setupdateState(-1)
+
+
+}
+
+
+
+}
+function EditList({current,lists, setList}) {
     function handleInputName(event) {
         const name = event.target.name;
         const value = event.target.value;
@@ -308,29 +241,71 @@ function EditList({ current, lists, setList }) {
 
     }
 
-    return (
-
-        <form>
-            <label>
-
-                <input type="text" onChange={handleInputName} name="name" value={current.name} />
-            </label>
-            <label>
-
-                <input type="text" onChange={handleInputMoile} name="mobile" value={current.mobile} />
-            </label>
-            <label>
-
-                <input type="text" onChange={handleInputGender} name="gender" value={current.gender} />
-            </label>
-            <label>
-
-                <input type="text" onChange={handleInputContactType} name="contacttype" value={current.contacttype} />
-            </label>
-
-            <button type="submit">update</button>
-        </form>
-
+    return(
+      
+            <tr>
+                <td><input type="text"  onChange={handleInputName} name="name" value={current.name} /></td>
+                <td><input type="text"  onChange={handleInputMoile} name="mobile" value={current.mobile}/></td>
+                <td><input type="text" onChange={handleInputGender} name="gender" value={current.gender} /></td>
+                <td><input type="text"   onChange={handleInputContactType} name="contacttype" value={current.contacttype} /></td>
+                <td><button type="submit" />Update</td>
+                        
+                    </tr>
+           
+      
     )
 }
-export default Crud
+
+
+
+function AddList({ setList }) {
+    const nameRef = useRef();
+    const mobileRef = useRef();
+    const genderRef = useRef();
+    const contactRef = useRef();
+    function handleSubmit(event) {
+        event.preventDefault();
+        const name = event.target.elements.name.value;
+        const mobile = event.target.elements.mobile.value;
+        const gender = event.target.elements.gender.value;
+        const contacttype = event.target.elements.contacttype.value
+        const newlist = {
+            id: 5,
+            name,
+            mobile,
+            gender,
+            contacttype
+        }
+        setList((preList) => {
+            return (preList.concat(newlist))
+        })
+        nameRef.current.value = ""
+        mobileRef.current.value = ""
+        genderRef.current.value = ""
+        contactRef.current.value = ""
+
+    }
+    return(
+
+            <form onSubmit={handleSubmit}>
+                
+                    <input type="text" name="name" placeholder="Enter Name" ref={nameRef} />
+                
+                
+                    
+                    <input type="text" name="mobile" placeholder="Enter Mobile" ref={mobileRef} />
+                
+                
+                    
+                    <input type="text" name="gender" placeholder="Male/Female" ref={genderRef} />
+                
+                
+                    
+                    <input type="text" name="contacttype" placeholder="Personal/Business" ref={contactRef} />
+                
+    
+                <button type="submit">Add</button>
+            </form>
+    )
+}
+export default CrudData
