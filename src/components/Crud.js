@@ -51,26 +51,23 @@ function Crud() {
                         {(() => {
 
                             let datalen = [];
-                            let text = "";
+                            for (let x in List) {
 
-                            for (let i = 0; i <= lists.length; i = +1) {
+                                console.log(x)
+                                console.log("hi")
+                                console.log(List[x].gender)
 
-
-                                if (lists[i].gender == "Female") {
-                                    datalen.push(lists);
-                                    console.log("hello");
-                                    console.log(datalen.length);
-                                    console.log(lists[i].gender);
-                                    console.log(datalen[0].gender)
-
+                                console.log(datalen.length)
+                                if (List[x].gender == "Female") {
+                                    datalen.push(List[x]);
+                                    console.log(List[x].name)
                                 }
-                                else {
-                                    console.log("male not found")
-                                }
-
-                                return datalen.length
+                                else console.log("Female not found")
                             }
+
+                            return (datalen.length)
                         }
+
 
                         )()}
                     </li>
@@ -79,24 +76,22 @@ function Crud() {
 
                         {(() => {
 
-                            let datalen = [];
-                            let text = "";
+let datalen = [];
+for (let x in List) {
 
-                            for (let i = 0; i <= lists.length; i = +1) {
-                                if (lists[i].gender == "Male") {
-                                    datalen.push(lists);
-                                    console.log("hello");
-                                    console.log(datalen.length);
-                                    console.log(lists[i].gender);
-                                    console.log(datalen[0].gender)
+    console.log(x)
+    console.log("hi")
+    console.log(List[x].gender)
 
-                                }
-                                else {
-                                    console.log("male not found")
-                                }
+    console.log(datalen.length)
+    if (List[x].gender == "Male") {
+        datalen.push(List[x]);
+        console.log(List[x].name)
+    }
+    else console.log("Male not found")
+}
 
-                                return datalen.length
-                            }
+return (datalen.length)
                         }
                         )()}
                     </li>
@@ -105,24 +100,22 @@ function Crud() {
 
                         {(() => {
 
-                            let datalen = [];
-                            let text = "";
+let datalen = [];
+for (let x in List) {
 
-                            for (let i = 0; i <= lists.length; i = +1) {
-                                if (lists[i].contacttype == "Personal") {
-                                    datalen.push(lists);
-                                    console.log("hello");
-                                    console.log(datalen.length);
-                                    console.log(lists[i].contacttype);
-                                    console.log(datalen[0].contacttype)
+    console.log(x)
+    console.log("hi")
+    console.log(List[x].contacttype)
 
-                                }
-                                else {
-                                    console.log("personal not found")
-                                }
+    console.log(datalen.length)
+    if (List[x].contacttype == "Personal") {
+        datalen.push(List[x]);
+        console.log(List[x].contacttype)
+    }
+    else console.log("personal contact not found")
+}
 
-                                return datalen.length
-                            }
+return (datalen.length)
                         }
                         )()}
                     </li>
@@ -131,24 +124,22 @@ function Crud() {
 
                         {(() => {
 
-                            let datalen = [];
-                            let text = "";
+let datalen = [];
+for (let x in List) {
 
-                            for (let i = 0; i <= lists.length; i = +1) {
-                                if (lists[i].contacttype == "Business") {
-                                    datalen.push(lists);
-                                    console.log("hello");
-                                    console.log(datalen.length);
-                                    console.log(lists[i].contacttype);
-                                    console.log(datalen[0].contacttype)
+    console.log(x)
+    console.log("hi")
+    console.log(List[x].contacttype)
 
-                                }
-                                else {
-                                    console.log("Business not found")
-                                }
+    console.log(datalen.length)
+    if (List[x].gender == "Male") {
+        datalen.push(List[x]);
+        console.log(List[x].contacttype)
+    }
+    else console.log("Businee contact not found")
+}
 
-                                return datalen.length
-                            }
+return (datalen.length)
                         }
                         )()}
                     </li>
