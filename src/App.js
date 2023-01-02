@@ -1,16 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
-import './components/ContactData';
+
+
 
 function App() {
   return (
     <div className="App">
       
-        Hello Anuradha...................
-
-        
+        Hello Anuradha.................. Reactjs Welcome
+      
     </div>
   );
 }
+
 
 export default App;

@@ -1,0 +1,8 @@
+.con-dtn-fema{
+    display:flex;
+    justify-content:start;
+    flex-direction:column;
+    background-color:aqua;  
+  
+    width: 200px;
+  }
