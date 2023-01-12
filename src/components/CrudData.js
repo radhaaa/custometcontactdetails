@@ -248,7 +248,7 @@ function EditList({current,lists, setList}) {
                 <td><input type="text"  onChange={handleInputMoile} name="mobile" value={current.mobile}/></td>
                 <td><input type="text" onChange={handleInputGender} name="gender" value={current.gender} /></td>
                 <td><input type="text"   onChange={handleInputContactType} name="contacttype" value={current.contacttype} /></td>
-                <td><button type="submit" />Update</td>
+                <td><button type="submit">Update</button></td>
                         
                     </tr>
            
