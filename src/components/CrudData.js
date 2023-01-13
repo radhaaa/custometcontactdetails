@@ -43,6 +43,18 @@ function CrudData(){
     ]
     const [lists, setList] = useState(List)
     const [updateState, setupdateState] = useState(-1)
+    function getid(){
+        let id = 0;
+        for (let x in lists) {
+            if (x.id > id) {
+                id= x.id
+            }
+        }
+        console.log("id value"+id)
+        return id
+        
+    }
+        
     return(
         <div className='ui main'>
             <div className="con-dtn-fema">
@@ -150,7 +162,7 @@ function CrudData(){
                 </div>
             </div>
 
-        <AddList setList={setList} />
+        <AddList  id= { getid()} setList={setList} />
         <form onSubmit={handleSubmit}>
         <table>
             {
@@ -204,6 +216,15 @@ function handleSubmit(event) {
 
 }
 function EditList({current,lists, setList}) {
+    function handleInputid(event) {
+        const name = event.target.id;
+        const value = event.target.value;
+        const newlist = lists.map((li) => (
+            li.id === current.id ? { ...li, name: value } : li
+        ))
+        setList(newlist)
+
+    }
     function handleInputName(event) {
         const name = event.target.name;
         const value = event.target.value;
@@ -244,6 +265,7 @@ function EditList({current,lists, setList}) {
     return(
       
             <tr>
+                <td><input type="text"  onChange={handleInputid} name="id" value={current.id} /></td>
                 <td><input type="text"  onChange={handleInputName} name="name" value={current.name} /></td>
                 <td><input type="text"  onChange={handleInputMoile} name="mobile" value={current.mobile}/></td>
                 <td><input type="text" onChange={handleInputGender} name="gender" value={current.gender} /></td>
@@ -257,28 +279,33 @@ function EditList({current,lists, setList}) {
 }
 
 
-
-function AddList({ setList }) {
+function AddList({ id,setList }) {
+    const idRef = useRef();
     const nameRef = useRef();
     const mobileRef = useRef();
     const genderRef = useRef();
     const contactRef = useRef();
     function handleSubmit(event) {
         event.preventDefault();
+        const id = event.target.elements.id.value;
         const name = event.target.elements.name.value;
         const mobile = event.target.elements.mobile.value;
         const gender = event.target.elements.gender.value;
         const contacttype = event.target.elements.contacttype.value
         const newlist = {
-            id: 5,
+            id:id,
             name,
             mobile,
             gender,
             contacttype
+            
         }
+        
         setList((preList) => {
+            
             return (preList.concat(newlist))
         })
+        idRef.current.value = ""
         nameRef.current.value = ""
         mobileRef.current.value = ""
         genderRef.current.value = ""
@@ -288,6 +315,7 @@ function AddList({ setList }) {
     return(
 
             <form onSubmit={handleSubmit}>
+                <input type="text" name="id" placeholder="Enter id" ref={idRef} />
                 
                     <input type="text" name="name" placeholder="Enter Name" ref={nameRef} />
                 
@@ -308,4 +336,5 @@ function AddList({ setList }) {
             </form>
     )
 }
+
 export default CrudData

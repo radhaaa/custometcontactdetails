@@ -1,8 +1,8 @@
 import './App.css';
 
-import ReactDOM from 'react-dom';   
+//import ReactDOM from 'react-dom';   
 //import CrudData from './components/CrudData';
-import Crud from './components/Crud';
+//import Crud from './components/Crud';
 import CrudData from './components/CrudData';
 
 
@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       
         
-        <CrudData />
+   <CrudData/>
        
       
       
